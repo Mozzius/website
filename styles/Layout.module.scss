@@ -1,0 +1,62 @@
+.section {
+  padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 960px;
+
+  .blog {
+    padding: 20px 0 50px;
+  }
+}
+
+.header {
+  box-shadow: 0 2px 15px #ff7c94;
+  background: conic-gradient(
+    at 125% 50%,
+    #b78cf7,
+    #ff7c94,
+    #ffcf0d,
+    #ff7c94,
+    #b78cf7
+  );
+
+  .section {
+    padding: 20px 20px;
+
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      margin: 200px 0 10px;
+      max-width: 600px;
+      font-weight: 100;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    .author_and_date {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #fff;
+      margin: 0;
+      width: 100%;
+      font-weight: 300;
+      text-align: right;
+      opacity: 0.75;
+
+      span {
+        float: left;
+        font-size: 1rem;
+
+        @media (max-width: 678px) {
+          float: none;
+          display: block;
+        }
+      }
+    }
+  }
+}

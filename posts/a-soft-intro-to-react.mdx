@@ -1,0 +1,386 @@
+---
+title: A Soft Introduction to React, Part 1
+author: Samuel Newman
+date: 2020-03-06
+---
+
+import { AlertButton, Counter, WindowWidth } from "../../components/blog-stuff";
+
+So, you've heard about this thing all the cool kids are using nowadays and you're wondering how it works? Well this is the guide for you! I'm going to gently introduce React to someone who might know some web dev stuff, but who reaches for jQuery whenever they have to do something complicated.
+
+To make this introduction as soft as possible, you can play along using [codesandbox](https://codesandbox.io/) - but first, let's look at a simple thing you might want to do.
+
+By the end of the article, we should have a counter that looks something like this:
+
+<Counter />
+
+# 1. The old-fashioned way
+
+Say you want a button that shows an alert popup when you click it. How do you do this?
+
+## The jQuery approach
+
+If you had the following HTML file, you'd need to first create the button, add an event listener to it, then insert it in the `<div>`. What a pain!
+
+```html
+<html>
+  <head>
+    <title>jQuery Example</title>
+  </head>
+  <body>
+    <div id="btn-goes-here"></div>
+  </body>
+</html>
+```
+
+Now comes the jQuery. Notice how we're just repeatedly doing stuff to the same variable?
+
+```javascript
+$(document).ready(function() {
+  var button = $('<button></button>');
+  button.text('Click Me!');
+  button.on('click', function () {
+    alert('You clicked the button'!);
+  });
+  $('#btn-goes-here').append(button);
+})
+```
+
+And it only gets worse, as nested elements get increasingly verbose and complicated.
+
+Luckily, there is another way...
+
+## The React approach
+
+```jsx
+import React from "react";
+
+export const AlertButton = () => {
+  return (
+    <button onClick={() => alert("You clicked the button!")}>Click Me!</button>
+  );
+};
+```
+
+Here's that exact button here: <AlertButton />
+
+I'm guessing you're wondering if that's HTML in the JavaScript, and the answer is kind of. This is actually **JSX**, a flavor of JavaScript which lets you put HTML in the middle of JavaScript, and then this is _transpiled_ into real JavaScript that can be ran in the browser (but that's a story for another time). More importantly, there's a big difference to the _approach_ of the two methods. React uses a _declarative_ programming style, and traditional JavaScript/jQuery use an _imperative_ programming style.
+
+## Declarative vs Imperative programming
+
+To understand the difference, you need to imagine you want a painting. Using imperative painting, you would just go paint it yourself - paint the background, paint the flowers etc one by one until the painting is complete. If you were to paint it declaratively, you would _declare_ what you want your painting to look like (blue background, 3 red flowers in a vase) and then get your friend to paint it for you.
+
+In this metaphor, your friend is React - it handles all the painting for you (modifying values in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction), keeping track of changes) leaving you free to fulfil your artistic vision.
+
+# 2. A Quick Breakdown
+
+There are 3 important concepts to understand in React - _components_, _props_, and _state_.
+
+> Now's the time to play along! [Click this link](https://codesandbox.io/s/) and select the React template.
+
+## Components and Nesting
+
+React is based around components, which in JS terms are functions (or classes). For example, `AlertButton` is a function. The real power of this is that you can _nest_ these functions. Here is how we could put the alert button on a page:
+
+```jsx
+import React from "react";
+import { AlertButton } from "./alertbutton";
+
+export const App = () => {
+  return (
+    <div>
+      <h1>Alert Button Example</h1>
+      <AlertButton />
+    </div>
+  );
+};
+```
+
+We could then nest `App` in something else, and nest that something else in another component. The possibilities are endless!
+
+But how can components interact with each other?
+
+## Props
+
+The answer is the next fundamental part of React - _props_. Props (short for properties, I assume) allows you to pass data down into child components. To demonstrate this, we're going to modify `<AlertButton />` so that it takes a prop specifying the message.
+
+```jsx
+export const AlertButton = ({ message }) => {
+  // the props are destructured here
+  // alternatively you could take a props parameter
+  // and use props.message instead
+  return <button onClick={() => alert(message)}>Click Me!</button>;
+};
+
+export const App = () => {
+  return (
+    <div>
+      <h1>Alert Button Example</h1>
+      <AlertButton message="I'm a prop!" />
+    </div>
+  );
+};
+```
+
+You may notice that we're passing a function to the `onClick` property of the button. This is because normal HTML elements take some props much like they do in real HTML - such as `id`. There are some important differences - they all\* are now in Pascal case (i.e. `onClick`), and the most glaring change is `class` is now `className`, since "class" is a protected keyword in JavaScript. Also, we're passing a function - _this is important_. You can pass anything to a component (arrays, objects, functions) and the component will just receive them as a prop. Passing functions is especially useful, as we will see when we come to talk about state in just a moment.
+
+One final thing is that you can also receive the children of a component - they are simply found in `props.children`. For example, if you wanted to make a wrapper component for adding a dollar sign:
+
+```jsx
+export const Dollars = ({ children }) => {
+  return <p>${children}</p>;
+};
+
+// <Dollars>20</Dollars> -> $20
+```
+
+## Conditional Rendering
+
+You remember how I said there's 3 important concepts? Well conditional rendering is pretty important too. The idea is for a component to return different things depending on its props and/or its state. This allows you to build components that actually do things when data changes.
+
+You can't really fit a whole if statement into the JSX, so the common solution is to use boolean expressions and the ternary operator. A quick recap - in JavaScript (and most programming languages) you can do something called short-circuit evaluations. These allow you to do very concise comparisons, because it checks the first value in the expression, and then only evaluates the second value if the first value is true (because if it's false, it wouldn't matter what the second one turns out to be). If the second value is a function, or even better a React component, then it will only be executed if the first value is true.
+
+Here, I made some examples of this in 'practice':
+
+```jsx
+// Okay, this component might not be 'actually useful'. Whatever.
+
+export const DayNight = ({ isDay }) => {
+  // we're taking a boolean, isDay, and
+  // we want to return either a sun or a moon
+  return <p>{isDay ? "☀️" : "🌙"}</p>;
+};
+
+// Here, we only want to provide a link to the admin section
+// if the current user is an admin
+
+export const Application = ({ user }) => {
+  return (
+    <div>
+      <NavBar>{user.isAdmin && <AdminButton />}</NavBar>
+      <PageContent user={user} />
+    </div>
+  );
+};
+```
+
+## State
+
+State is by far the most important part of React. It's what makes it `react`ive, so to speak.
+
+So far, our components take in data from the top, from their props, and then they pass it down to their children. But what if we want the component contain it's own data? This is where state comes in.
+
+An easy example of using state is a counter. Here's what we could make with what we know so far:
+
+```jsx
+const Counter = ({ count }) => {
+  return (
+    <div>
+      <button>+</button>
+      <p>Count: {count}</p>
+    </div>
+  );
+};
+```
+
+The question is, how do we link the counter to the button? A naïve approach might just be to use a normal JavaScript variable.
+
+```jsx
+// This doesn't work!
+let count = 0;
+
+const Counter = () => {
+  // This "add" function will be ran
+  // when you click the button - React handles
+  // the event listening stuff
+  const add = () => {
+    count += 1;
+  };
+
+  return (
+    <div>
+      <button onClick={add}>+</button>
+      <p>Count: {count}</p>
+    </div>
+  );
+};
+```
+
+You can try this but it won't work - the problem is, React has the concept of rendering wherein it executes the "Counter" function to get the latest result from the component. When you click the button, `count` will be updated, but the component will not re-render. This is because React doesn't know that the value of `count` has changed.
+
+In order to inform the component that the value of `count` has changed, we need to use the `useState` function. This is what is known in React terminology as a _hook_.
+
+```jsx
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  const add = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <button onClick={add}>+</button>
+      <p>Count: {count}</p>
+    </div>
+  );
+};
+```
+
+`useState` takes in a initial value and returns an array of two values, which we [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (because it looks neat). The first value is the value itself, and the second value is a function that allows you to update the value.
+
+What makes makes this different from a plain variable is that when we `setCount` to a new value, React will re-render the component. This means that `count` is kept in sync with the HTML output at all times!
+
+> React is smart, and will only re-render if the new value is different.
+
+This unlocks the enormous power of React. You can use state to keep track of things, and you can use it to make your components more dynamic. You can pass data this data to other components, and from this construct complex applications.
+
+Hooks need to obey two major rules:
+
+1. Only call them at the top level, and don't call them conditionally or in loops
+   React uses the order in which they are called in order to figure out which hook is which
+2. Only call them in React components
+
+However, there is one more big piece of the puzzle we need to tackle. I know I said there were 3 major concepts, but sometimes life isn't fair.
+
+# 3. Effects
+
+Ok, now we have stateful components. However, sometimes the code runs too much - you might have noticed if you put something in the body of the component, it will run every time the component is rendered. This is called _side effects_.
+
+```jsx
+const Counter = ({ globalCount }) => {
+  const [count, setCount] = useState(0);
+
+  console.log(count);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <p>Count: {count}</p>
+      <p>Global count: {globalCount}</p>
+    </div>
+  );
+};
+```
+
+This will log the count every time the component is rendered. However, imagine that we had some prop or another piece of state that is also triggering renders independantly of `count`. This would be annoying, since now it's logging count not just when count changes, but when anything changes!
+
+The is a solution - we can use the `useEffect` function. This function is similar to `useState`, but it's used to choose if we want to run certain code when the component is rendered.
+
+`useEffect` takes in a function and an array of values, and it will only run this function when the component when the values in the array change.
+
+```jsx
+const Counter = ({ globalCount }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log(count);
+  }, [count]);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <p>Count: {count}</p>
+      <p>Global count: {globalCount}</p>
+    </div>
+  );
+};
+```
+
+Now, count will only be logged when the count itself changes, and not just when the component is rendered.
+
+`useEffect` is _extremely_ powerful - here's a few examples:
+
+## Running something once, when the component renders
+
+Simply use `useEffect` with an empty array. This will run the function when the component is rendered, and no other time.
+
+```jsx
+// `data` will be undefined until the fetch resolves
+const [data, setData] = useState();
+
+useEffect(() => {
+  fetch("/api/data")
+    .then((res) => res.json())
+    .then((data) => setData(data));
+}, []);
+```
+
+## Running stuff conditionally
+
+Say we have 2 values, and want to calculate a third value based on these two. We can use `useEffect` to calculate this value whenever either `a` or `b` changes.
+
+This is useful for deriving state from other state.
+
+```jsx
+const [a, setA] = useState(0);
+const [b, setB] = useState(0);
+const [c, setC] = useState(0);
+
+// calculate c
+useEffect(() => {
+  setC(a + b);
+}, [a, b]);
+```
+
+## Event listeners
+
+Something I haven't mentioned yet - if we return a function from the function we pass to `useEffect`, it will be called when the component is unmounted. This is useful for unsubscribing from things and cleaning up event listeners.
+
+Here, we add an event listener to `window` to find the width of the window and keep it updated when the window size changes.
+
+```jsx
+const [width, setWidth] = useState(window.innerWidth);
+
+useEffect(() => {
+  const findWidth = () => setWidth(window.innerWidth);
+
+  window.addEventListener("resize", findWidth);
+  return () => window.removeEventListener("resize", findWidth);
+}, []);
+```
+
+Note that if we have something in the dependency array that causes the effect to run, it will execute the cleanup function before it runs the effect again with the new values.
+
+# 4. Custom hooks
+
+Hooks are not magical - they're just other functions! We can write new hooks - they just also need to obey the rules of hooks.
+
+This can be helpful for abstracting logic and keeping things DRY. As an example, we can rewrite our previous example that measures the width of the window to be a simple hook.
+
+```jsx
+// the goal: `width` is always equal to the width of the window
+const width = useWindowWidth();
+
+return <p>Your window is {width}px wide</p>;
+```
+
+```jsx
+// useWindowWidth.js
+const useWindowWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const findWidth = () => setWidth(window.innerWidth);
+
+    window.addEventListener("resize", findWidth);
+    return () => window.removeEventListener("resize", findWidth);
+  }, []);
+
+  return width;
+};
+```
+
+We can now reuse `useWindowWidth` across your application! Here it is here:
+
+<WindowWidth />
+
+Change your window size, and it'll update.
+
+# 5. Conclusion
+
+React is a powerful tool, and this post should hopefully have given you a tiny taste of what you can do with it. If you're anything like me, you'll never want to go back to doing things the old way.
+
+The [new React docs](https://beta.reactjs.org/learn) has a tutorial that explains things better than I ever could, so you should check it out if you want to learn more.
+
+I hope you enjoyed this post, and [let me know](mailto:samuel@felixnewman.com) if you have any questions or comments!
