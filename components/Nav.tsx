@@ -16,13 +16,16 @@ const Link = ({
   const { route } = useRouter();
   const [, base] = route.split("/");
 
+  const active = path === `/${base}`;
+
   return (
     <NextLink href={path}>
       <a
         className={cls({
-          [classes.active]: path === `/${base}`,
+          [classes.active]: active,
           [classes.homeLink]: route === "/",
         })}
+        aria-current={active ? "page" : undefined}
       >
         {children}
       </a>

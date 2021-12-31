@@ -1,9 +1,13 @@
 import { Text } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { GroupProps, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import type { Group } from "three";
 
-const Name = () => {
+interface Props extends GroupProps {
+  center?: boolean;
+}
+
+const LitText: React.FC<Props> = ({ center, children, ...props }) => {
   const ref = useRef<Group>(null!);
   const light1 = useRef<Group>(null!);
   const light2 = useRef<Group>(null!);
@@ -31,7 +35,7 @@ const Name = () => {
   });
 
   return (
-    <group ref={ref}>
+    <group ref={ref} {...props}>
       <Text
         color="#000"
         outlineWidth={0.0025}
@@ -40,9 +44,10 @@ const Name = () => {
         maxWidth={0.1}
         lineHeight={1}
         letterSpacing={0.02}
+        textAlign={center ? "center" : "left"}
       >
         <meshPhongMaterial attach="material" color="#fff" />
-        SAMUEL NEWMAN
+        {children}
       </Text>
       <group ref={light1}>
         <pointLight position={[0, 0, 0.5]} />
@@ -57,4 +62,4 @@ const Name = () => {
   );
 };
 
-export default Name;
+export default LitText;
