@@ -4,10 +4,10 @@ import { useRef } from "react";
 import type { Group } from "three";
 
 interface Props extends GroupProps {
-  center?: boolean;
+  textAlign?: "left" | "right" | "center" | "justify";
 }
 
-const LitText: React.FC<Props> = ({ center, children, ...props }) => {
+const LitText: React.FC<Props> = ({ textAlign, children, ...props }) => {
   const ref = useRef<Group>(null!);
   const light1 = useRef<Group>(null!);
   const light2 = useRef<Group>(null!);
@@ -44,7 +44,7 @@ const LitText: React.FC<Props> = ({ center, children, ...props }) => {
         maxWidth={0.1}
         lineHeight={1}
         letterSpacing={0.02}
-        textAlign={center ? "center" : "left"}
+        textAlign={textAlign}
       >
         <meshPhongMaterial attach="material" color="#fff" />
         {children}
