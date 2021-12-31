@@ -19,10 +19,10 @@ const Intro = () => {
       <LitText position={[0, viewport.height * 0, 0]} textAlign="left">
         SAMUEL NEWMAN
       </LitText>
-      <LitText position={[0, viewport.height * -1, 0]} textAlign="center">
+      <LitText position={[0, viewport.height * -0.5, 0]} textAlign="center">
         ABOUT ME
       </LitText>
-      <LitText position={[0, viewport.height * -3, 0]} textAlign="center">
+      <LitText position={[0, viewport.height * -2.5, 0]} textAlign="center">
         CONTACT
       </LitText>
     </Scroll>
@@ -40,10 +40,10 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
   return (
     <Scroll html>
       <div className={classes.arrow} ref={ref}>
+        <p>Scroll...</p>
         <div>
           <ArrowDown color="#fff" size={32} />
         </div>
-        <p>Scroll...</p>
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
@@ -64,7 +64,7 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
         <div className={classes.middle}>
           {"I'm"} currently working at Codesigned Ltd on a variety of web and
           app projects.{" "}
-          <a onClick={linkTo} href="/portfolio">
+          <a onClick={linkTo}>
             I also have a portfolio of personal projects.
           </a>
         </div>
@@ -97,7 +97,7 @@ const Home: NextPage = () => {
           dpr={typeof window !== "undefined" ? window.devicePixelRatio : 1}
           camera={{ fov: 30 }}
         >
-          <ScrollControls pages={5}>
+          <ScrollControls pages={4}>
             <Intro />
             <IntroContent
               linkTo={(evt: MouseEvent) => {

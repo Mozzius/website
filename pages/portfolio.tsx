@@ -66,7 +66,7 @@ const Portfolio = () => {
         />
         <Project
           name="Lyric, a song lyric game"
-          description="One of my earliest projects, Lyric is a game where you have to figure out the lyrics of a song. You can play alone or with other people. Currently not working :("
+          description="One of my earliest projects, Lyric is a game where you have to figure out the lyrics of a song. You can play alone or with other people"
           image={lyricImg}
           url="lyric"
           tags={["Python", "Flask", "MongoDB", "Socket.io"]}

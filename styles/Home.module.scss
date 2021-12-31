@@ -7,11 +7,11 @@
 }
 
 .about {
-  top: 200vh;
+  top: 150vh;
 }
 
 .contact {
-  top: 300vh;
+  top: 170vh;
 }
 
 .about,
@@ -73,17 +73,10 @@
   p {
     margin: 20px 0 0;
     pointer-events: none;
-    opacity: 0;
     transition: opacity 0.3s ease;
     color: #fff;
     text-align: center;
     font-weight: 100;
-  }
-
-  &:hover {
-    p {
-      opacity: 1;
-    }
   }
 
   div {
