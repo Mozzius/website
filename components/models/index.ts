@@ -1,9 +1,0 @@
-export { default as Ambulance } from "./Ambulance";
-export { default as DeliveryVan } from "./DeliveryVan";
-export { default as FireTruck } from "./FireTruck";
-export { default as Hatchback } from "./Hatchback";
-export { default as LuxurySUV } from "./LuxurySUV";
-export { default as PoliceCar } from "./PoliceCar";
-export { default as SportsSedan } from "./SportsSedan";
-export { default as Taxi } from "./Taxi";
-export { default as Van } from "./Van";
