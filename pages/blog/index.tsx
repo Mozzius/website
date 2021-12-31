@@ -13,17 +13,19 @@ import Head from "next/head";
 interface Props {
   blogs: {
     slug: string;
-    [key: string]: string;
+    timestamp: number;
+    [key: string]: string | number;
   }[];
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const blogs = getSlugs.map((slug) => {
     const source = fs.readFileSync(mdxPath(slug));
     const { data } = matter(source);
 
     for (const key of Object.keys(data)) {
       if (data[key] instanceof Date) {
+        data.timestamp = (data[key] as Date).getTime();
         data[key] = format(data[key], "MMMM do, yyyy");
       }
     }
@@ -42,6 +44,8 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 };
 
 const BlogIndex: NextPage<Props> = ({ blogs }) => {
+
+  console.log(blogs)
   return (
     <DefaultLayout>
       <Head>
@@ -51,10 +55,8 @@ const BlogIndex: NextPage<Props> = ({ blogs }) => {
       <h1>Posts</h1>
       <ul className={classes.cards}>
         {blogs
-          .sort(
-            (a, b) =>
-              new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime()
-          )
+          .filter((blog) => !blog.draft)
+          .sort((a, b) => b.timestamp - a.timestamp)
           .map((blog) => (
             <li key={blog.slug}>
               <div className={classes.background} />

@@ -46,7 +46,7 @@
         background-color: #fff;
         flex-direction: column;
         border-top: rgba(120, 120, 120, 0.3) solid 1px;
-        transition: height 0.5s ease-in-out;
+        transition: height 1s ease-in-out;
 
         &.toggled {
           height: calc(100vh - 50px);

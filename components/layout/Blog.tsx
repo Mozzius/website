@@ -17,7 +17,9 @@ const BlogLayout = ({ children, frontMatter }: Props) => {
           {frontMatter.author && (
             <p className={classes.author_and_date}>
               <span>By {frontMatter.author}</span>
-              {frontMatter.date && frontMatter.date}
+              {frontMatter.date && (
+                <time dateTime={frontMatter.timestamp}>{frontMatter.date}</time>
+              )}
             </p>
           )}
         </div>

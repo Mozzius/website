@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
   for (const key of Object.keys(data)) {
     if (data[key] instanceof Date) {
+      data.timestamp = (data[key] as Date).getTime();
       data[key] = format(data[key], "MMMM do, yyyy");
     }
   }
@@ -66,6 +67,9 @@ const BlogPage: NextPage<Props> = ({ source, frontMatter }) => {
     <BlogLayout frontMatter={frontMatter}>
       <Head>
         <title>{frontMatter.title} | Samuel Newman</title>
+        {frontMatter.description && (
+          <meta name="description" content={frontMatter.description} />
+        )}
       </Head>
       <MDXRemote {...source} components={components} />
     </BlogLayout>

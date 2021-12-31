@@ -1,0 +1,76 @@
+---
+title: A Gentle Introduction to React Three Fiber
+author: Samuel Newman
+date: 2021-12-30
+draft: true
+---
+
+import { SpinningCube } from "../components/blog";
+
+Three.js is great. It's an awesome library for building 3D experiences on the web.
+
+However, it's very object-oriented, which for me who much prefer functional programming, is a bit of a pain.
+
+React is also great. It solves a lot of problems which stand in the way of build great user interfaces.
+
+If only there was a way to combine the two...
+
+![A Venn diagram with React in one circle, ThreeJS in the other, and question marks in the middle](/three-react-venn.png)
+
+Introducing... [React Three Fiber](https://github.com/pmndrs/react-three-fiber/)!
+
+R3F takes React's powerful model and applies it to Three.js. If that sounds weird, bare with me. It turns out they mesh together _beautifully_.
+
+First things first - let me prove it. If a picture if worth a thousand words, here's 60,000 words per second:
+
+<SpinningCube />
+
+Here's an exerpt of the code that renders the above (minus the mouse stuff):
+
+```jsx
+const SpinningCube = () => {
+  const ref = useRef<Mesh>(null!);
+
+  useFrame(({ clock }) => {
+    ref.current.rotation.y += Math.sin(clock.getElapsedTime()) / 20;
+    ref.current.rotation.x += Math.cos(clock.getElapsedTime()) / 20;
+    ref.current.rotation.z += Math.sin(clock.getElapsedTime()) / 20;
+  });
+
+  return (
+    <mesh ref={ref}>
+      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+      <meshStandardMaterial attach="material" color="#ff7c94" />
+    </mesh>
+  );
+};
+
+ReactDOM.render(
+  <Canvas>
+    <ambientLight />
+    <pointLight position={[10, 10, 10]} />
+    <SpinningCube />
+  </Canvas>,
+  document.getElementById("root")
+);
+```
+
+If you're at all familiar with vanilla Three.js, then you'll understand how impressively consise that is.
+
+Regardless, I bet your first reaction reading that code was "What the hell is a &#60;mesh&#62;?!".
+
+To understand this, we need to understand how React _really_ works.
+
+## React, Reconcilers, and what is JSX really?
+
+At it's most basic levels, `react` is a library that maintains a tree data structure. `react-dom` is it's sister library that compares this tree (the Virtual DOM, or VDOM), to the real DOM, and updates the real DOM to match as efficiently as possible.
+
+React DOM is what is known as a "reconciler". It reconciles the virtual DOM to the real DOM.
+
+However, you don't have to use React DOM to use React. You know this if you're used React Native - instead of &#60;div&#62; and &#60;p&#62;, you use &#60;View&#62; and &#60;Text&#62;, and React Native reconciles VDOM to the underlying native UI system.
+
+The clever part: who says you need to be reconciling to boring old UI trees? Why can't you reconcile the React tree to, say, Three.js' scene graph?
+
+As it turns out, you totally can. Enter, React Three Fiber.
+
+R3F is to Three.js as React DOM is to HTML. It's a bridge between the two. In fact, they're very loosely coupled, and you can use
