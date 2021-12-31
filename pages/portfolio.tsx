@@ -6,6 +6,7 @@ import classes from "../styles/Portfolio.module.scss";
 import websiteImg from "../images/website.png";
 import lyreImg from "../images/lyre.png";
 import lyricImg from "../images/lyric.png";
+import youflixImg from "../images/youflix.png";
 
 interface Props {
   name: string;
@@ -58,10 +59,10 @@ const Portfolio = () => {
         />
         <Project
           name="Lyre, a programming language"
-          description="My university dissertation project, Lyre is a typed language that compiles to Erlang and implements channel-based concurrency"
+          description="My university dissertation research project, Lyre is a typed language that compiles to Erlang and implements channel-based concurrency"
           image={lyreImg}
           url="lyre"
-          tags={["Haskell", "Erlang", "Type Theory"]}
+          tags={["Haskell", "Erlang", "Yacc", "Lex"]}
         />
         <Project
           name="Lyric, a song lyric game"
@@ -69,6 +70,13 @@ const Portfolio = () => {
           image={lyricImg}
           url="lyric"
           tags={["Python", "Flask", "MongoDB", "Socket.io"]}
+        />
+        <Project
+          name="YouFlix - YouTube in the style of Netflix"
+          description="This project pulls YouTube videos from the YouTube API and displays them in a Netflix-like UI"
+          image={youflixImg}
+          url="youflix"
+          tags={["TypeScript", "React", "Next.js", "Google API"]}
         />
       </div>
     </DefaultLayout>

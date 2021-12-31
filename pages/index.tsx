@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 import { BsChevronCompactDown as ArrowDown } from "react-icons/bs";
 
@@ -28,7 +29,7 @@ const Intro = () => {
   );
 };
 
-const IntroContent = () => {
+const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
   const scroll = useScroll();
   const ref = useRef<HTMLDivElement>(null!);
 
@@ -46,18 +47,26 @@ const IntroContent = () => {
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
-          {"I'm"} Samuel, a Senior Frontend Developer based in the UK
+          {"I'm"} Samuel, a Senior Frontend Developer based in the UK. I have a
+          passion for beautiful websites and beautiful code, and attempt to
+          create both at the same time.
         </div>
         <div className={classes.right}>
           I recently graduated First Class with Honours from the University of
-          Kent, obtaining a Bachelors degree in Computer Science
+          Kent, obtaining a Bachelors degree in Computer Science. I specialised
+          in the study of programming languages and type systems, creating a new
+          one for my{" "}
+          <a href="https://github.com/mozzius/lyre">
+            dissertation research project
+          </a>
+          .
         </div>
         <div className={classes.middle}>
           {"I'm"} currently working at Codesigned Ltd on a variety of web and
           app projects.{" "}
-          <Link href="/portfolio">
-            <a>I also have a portfolio of personal projects.</a>
-          </Link>
+          <a onClick={linkTo} href="/portfolio">
+            I also have a portfolio of personal projects.
+          </a>
         </div>
       </section>
       <section className={classes.contact}>
@@ -71,6 +80,8 @@ const IntroContent = () => {
 };
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -88,7 +99,12 @@ const Home: NextPage = () => {
         >
           <ScrollControls pages={5}>
             <Intro />
-            <IntroContent />
+            <IntroContent
+              linkTo={(evt: MouseEvent) => {
+                evt.preventDefault();
+                router.push("/portfolio");
+              }}
+            />
           </ScrollControls>
           <color attach="background" args={["black"]} />
         </Canvas>
@@ -113,9 +129,17 @@ const Home: NextPage = () => {
           </p>
           <p>It then says (in normal letters):</p>
           <p>
-            {"I'm"} Samuel, a Senior Frontend Developer based in the UK.
+            {"I'm"} Samuel, a Senior Frontend Developer based in the UK. I have
+            a passion for beautiful websites and beautiful code, and attempt to
+            create both at the same time.
             <br />I recently graduated First Class with Honours from the
-            University of Kent, obtaining a Bachelors degree in Computer Science
+            University of Kent, obtaining a Bachelors degree in Computer
+            Science. I specialised in the study of programming languages and
+            type systems, creating a new one for my
+            <a href="https://github.com/mozzius/lyre">
+              dissertation research project
+            </a>
+            .
             <br />
             {"I'm"} currently working at Codesigned Ltd on a variety of web and
             app projects
