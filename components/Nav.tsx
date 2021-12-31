@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Cross as Hamburger } from "hamburger-react";
@@ -18,7 +18,12 @@ const Link = ({
 
   return (
     <NextLink href={path}>
-      <a className={cls({ [classes.active]: path === `/${base}` })}>
+      <a
+        className={cls({
+          [classes.active]: path === `/${base}`,
+          [classes.homeLink]: route === "/",
+        })}
+      >
         {children}
       </a>
     </NextLink>
@@ -27,8 +32,23 @@ const Link = ({
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
+  const { route, events } = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = () => setOpen(false);
+
+    events.on("routeChangeStart", handleRouteChange);
+
+    return () => events.off("routeChangeStart", handleRouteChange);
+  }, [events]);
+
   return (
-    <header className={classes.header}>
+    <header
+      className={cls(classes.header, {
+        [classes.home]: route === "/",
+        [classes.toggled]: open,
+      })}
+    >
       <div className={classes.inner}>
         <p>Samuel Newman</p>
         <nav className={cls({ [classes.toggled]: open })}>

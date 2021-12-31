@@ -1,10 +1,8 @@
-import { Suspense } from "react";
-import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import Train from "../components/Train";
+import Name from "../components/Name";
 
 import classes from "../styles/Home.module.scss";
 
@@ -19,22 +17,15 @@ const Home: NextPage = () => {
         />
       </Head>
       <div className={classes.container}>
-          <Canvas
-            className={classes.canvas}
-            dpr={typeof window !== "undefined" ? window.devicePixelRatio : 1}
-            camera={{ position: [0, 0, 10], fov: 30 }}
-            onCreated={({ camera }) => camera.lookAt(0, 5, 0)}
-          >
-            <Suspense fallback={null}>
-              <Train />
-              <OrbitControls />
-              <Environment
-                files={
-                  "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/hdris/canary-wharf/canary_wharf_1k.hdr"
-                }
-              />
-            </Suspense>
-          </Canvas>
+        <Canvas
+          className={classes.canvas}
+          dpr={typeof window !== "undefined" ? window.devicePixelRatio : 1}
+          camera={{ fov: 30 }}
+          shadows
+        >
+          <Name />
+          <color attach="background" args={["black"]} />
+        </Canvas>
       </div>
     </>
   );
