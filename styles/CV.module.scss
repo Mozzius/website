@@ -1,0 +1,22 @@
+.cv {
+  h1 {
+    text-align: center;
+  }
+
+  .summary {
+    width: 350px;
+    float: right;
+    margin: 0 0 0 20px;
+
+    p {
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+  }
+
+  .references {
+    font-weight: 600;
+    margin: 50px 0 30px;
+    text-align: center;
+  }
+}

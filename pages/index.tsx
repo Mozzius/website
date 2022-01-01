@@ -1,9 +1,8 @@
 import { Scroll, ScrollControls, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useRef } from "react";
 import { BsChevronCompactDown as ArrowDown } from "react-icons/bs";
 
@@ -47,7 +46,7 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
-          {"I'm"} Samuel, a Senior Frontend Developer based in the UK. I have a
+          {"I'm"} Samuel, a Senior Front-end Developer based in the UK. I have a
           passion for beautiful websites and beautiful code, and attempt to
           create both at the same time.
         </div>
@@ -85,7 +84,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Samuel Newman - Senior Frontend Developer</title>
+        <title>Samuel Newman - Senior Front-end Developer</title>
         <meta
           name="description"
           content="My personal site, a showcase of sorts"
@@ -129,7 +128,7 @@ const Home: NextPage = () => {
           </p>
           <p>It then says (in normal letters):</p>
           <p>
-            {"I'm"} Samuel, a Senior Frontend Developer based in the UK. I have
+            {"I'm"} Samuel, a Senior Front-end Developer based in the UK. I have
             a passion for beautiful websites and beautiful code, and attempt to
             create both at the same time.
             <br />I recently graduated First Class with Honours from the

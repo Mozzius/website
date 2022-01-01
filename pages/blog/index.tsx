@@ -44,8 +44,6 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const BlogIndex: NextPage<Props> = ({ blogs }) => {
-
-  console.log(blogs)
   return (
     <DefaultLayout>
       <Head>

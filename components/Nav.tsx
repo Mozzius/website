@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Cross as Hamburger } from "hamburger-react";
-import { ImMail4 as MailIcon, ImGithub as GithubIcon } from "react-icons/im";
+import {
+  FaEnvelopeSquare as MailIcon,
+  FaGithubSquare as GithubIcon,
+  FaLinkedin as LinkedinIcon,
+} from "react-icons/fa";
 
 import classes from "../styles/Nav.module.scss";
 import cls from "../utils/cls";
@@ -59,9 +63,13 @@ const Nav = () => {
           <Link path="/">Home</Link>
           <Link path="/blog">Blog</Link>
           <Link path="/portfolio">Portfolio</Link>
+          <Link path="/curriculum-vitae">Curriculum Vitae</Link>
           <div className={classes.external}>
             <a href="https://github.com/mozzius">
               <GithubIcon size={32} />
+            </a>
+            <a href="https://www.linkedin.com/in/samuel-felix-newman">
+              <LinkedinIcon size={32} />
             </a>
             <a href="mailto:samuel@felixnewman.com">
               <MailIcon size={32} />

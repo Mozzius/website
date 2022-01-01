@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { NextPage } from "next";
 
 import { DefaultLayout } from "../components/layout";
 import classes from "../styles/Portfolio.module.scss";
@@ -34,7 +35,7 @@ const Project = ({ name, description, image, url, tags }: Props) => {
   );
 };
 
-const Portfolio = () => {
+const Portfolio: NextPage = () => {
   return (
     <DefaultLayout>
       <h1>Portfolio</h1>

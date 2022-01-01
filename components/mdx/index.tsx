@@ -1,4 +1,4 @@
-import * as Components from "../blog";
+import * as Components from "../blog-stuff";
 import Codeblock from "./Codeblock";
 
 export const components = {
