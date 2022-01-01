@@ -85,10 +85,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Samuel Newman - Senior Front-end Developer</title>
-        <meta
-          name="description"
-          content="My personal site, a showcase of sorts"
-        />
       </Head>
       <div className={classes.container}>
         <Canvas
