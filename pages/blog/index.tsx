@@ -47,7 +47,7 @@ const BlogIndex: NextPage<Props> = ({ blogs }) => {
   return (
     <DefaultLayout>
       <Head>
-        <title>Samuel Newman | Blog</title>
+        <title>Blog | Samuel Newman</title>
         <meta name="description" content="My collection of ramblings" />
       </Head>
       <h1>Posts</h1>

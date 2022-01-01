@@ -10,6 +10,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="My personal site, a showcase of sorts"
+        />
       </Head>
       <Nav />
       <div className="page-content">

@@ -8,6 +8,7 @@ import websiteImg from "../images/website.png";
 import lyreImg from "../images/lyre.png";
 import lyricImg from "../images/lyric.png";
 import youflixImg from "../images/youflix.png";
+import Head from "next/head";
 
 interface Props {
   name: string;
@@ -38,6 +39,9 @@ const Project = ({ name, description, image, url, tags }: Props) => {
 const Portfolio: NextPage = () => {
   return (
     <DefaultLayout>
+      <Head>
+        <title>My Portfolio | Samuel Newman</title>
+      </Head>
       <h1>Portfolio</h1>
       <p>
         Click on a project to view it{"'"}s source code on GitHub -

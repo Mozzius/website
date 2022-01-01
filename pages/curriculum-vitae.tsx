@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 
 import { DefaultLayout } from "../components/layout";
 import classes from "../styles/CV.module.scss";
@@ -6,6 +7,9 @@ import classes from "../styles/CV.module.scss";
 const CV: NextPage = () => {
   return (
     <DefaultLayout>
+      <Head>
+        <title>Curriculum Vitae | Samuel Newman</title>
+      </Head>
       <div className={classes.cv}>
         <h1>Samuel Newman</h1>
         <ul className={classes.summary}>
