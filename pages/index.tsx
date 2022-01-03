@@ -130,7 +130,7 @@ const Home: NextPage = () => {
             <br />I recently graduated First Class with Honours from the
             University of Kent, obtaining a Bachelors degree in Computer
             Science. I specialised in the study of programming languages and
-            type systems, creating a new one for my
+            type systems, creating a new one for my{" "}
             <a href="https://github.com/mozzius/lyre">
               dissertation research project
             </a>
