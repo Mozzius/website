@@ -28,7 +28,8 @@ const CV: NextPage = () => {
         </ul>
         <p>
           Experienced senior front-end developer specialising in 3D experiences,
-          with a passion for UX. Based in Kent, UK.
+          with a passion for UX. Best at React, but I{"'"}m a quick study. Based
+          in Kent, UK.
         </p>
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
