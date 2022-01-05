@@ -8,16 +8,21 @@ body {
   overflow-x: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: #ff7c94;
+  --pink-shadow: 0 2px 15px #ff7c94;
+}
+
 a {
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
-}
-
-* {
-  box-sizing: border-box;
 }
 
 h1 {

@@ -18,7 +18,7 @@
     overflow: hidden;
 
     &:hover {
-      box-shadow: 0 2px 15px #ff7c94;
+      box-shadow: var(--pink-shadow);
 
       & > .content > p {
         max-height: 100%;

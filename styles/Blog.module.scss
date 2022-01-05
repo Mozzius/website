@@ -21,7 +21,7 @@
     cursor: pointer;
 
     &:hover {
-      box-shadow: 0 2px 15px #ff7c94;
+      box-shadow: var(--pink-shadow);
       transform: scale(1.05);
 
       .background {

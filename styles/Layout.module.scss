@@ -10,7 +10,7 @@
 }
 
 .header {
-  box-shadow: 0 2px 15px #ff7c94;
+  box-shadow: var(--pink-shadow);
   background: conic-gradient(
     at 125% 50%,
     #b78cf7,
