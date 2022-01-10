@@ -33,8 +33,12 @@ const CV: NextPage = () => {
         </p>
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
-        <p>Senior Frontend Developer | July 2020 - Present</p>
-        <p>Web Developer | March 2019 - July 2020</p>
+        <p className={classes.subtitle}>
+          Senior Frontend Developer | July 2020 - Present
+        </p>
+        <p className={classes.subtitle}>
+          Web Developer | March 2019 - July 2020
+        </p>
         <ul>
           <li>
             Built software using a variety of technology according to client
@@ -69,9 +73,13 @@ const CV: NextPage = () => {
         </ul>
         <h2>Education</h2>
         <h3>University of Kent</h3>
-        <p>2018 - 2021</p>
+        <p className={classes.subtitle}>
+          BSc Computer Science (1<sup>st</sup> class) | 2018 - 2021
+        </p>
         <p>
-          BSc Computer Science (1<sup>st</sup> class)
+          Learned Java, Erlang, Haskell, Go. Studied programming languages, type
+          systems, concurrency, and compilers. Graduated with first-class
+          honours.
         </p>
         <h2>Technical Skills</h2>
         <p>
