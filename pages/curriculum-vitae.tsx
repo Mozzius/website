@@ -27,14 +27,28 @@ const CV: NextPage = () => {
           </li>
         </ul>
         <p>
-          Experienced senior front-end developer specialising in 3D experiences,
-          with a passion for UX. Best at React, but I{"'"}m a quick study. Based
-          in Kent, UK.
+          Senior front-end developer specialising in 3D experiences, with a
+          passion for solving difficult problems. Based in Kent, UK.
+        </p>
+        <p>
+          Expert at React.js, JavaScript, TypeScript, HTML, CSS. Also proficient
+          with Node.js, Java, Erlang, Haskell, PHP, Git, Adobe XD, Bash. Always
+          looking to add to this list.
+        </p>
+        <h2>Education</h2>
+        <h3>BSc Computer Science, University of Kent</h3>
+        <p className={classes.subtitle}>
+          Bachelor of Science (Hons, 1<sup>st</sup> class) | 2018 - 2021
+        </p>
+        <p>
+          Learned Java, Erlang, Haskell, Go. Primarily studied concurrency, type
+          systems, programming languages, and compilers. Graduated with
+          first-class honours.
         </p>
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
         <p className={classes.subtitle}>
-          Senior Frontend Developer | July 2020 - Present
+          Senior Front-end Developer | July 2020 - Present
         </p>
         <p className={classes.subtitle}>
           Web Developer | March 2019 - July 2020
@@ -67,25 +81,10 @@ const CV: NextPage = () => {
             and external, enabling effective collaboration.
           </li>
           <li>
-            Effectively utilised Git along with CI/CD tools, and introduced this
-            workflow to a team that was not using version control.
+            Effectively utilised Git along with CI/CD, creating and maintaining
+            workflows that maximised developer productivity.
           </li>
         </ul>
-        <h2>Education</h2>
-        <h3>University of Kent</h3>
-        <p className={classes.subtitle}>
-          BSc Computer Science (1<sup>st</sup> class) | 2018 - 2021
-        </p>
-        <p>
-          Learned Java, Erlang, Haskell, Go. Studied programming languages, type
-          systems, concurrency, and compilers. Graduated with first-class
-          honours.
-        </p>
-        <h2>Technical Skills</h2>
-        <p>
-          React.js, TypeScript, Three.js, Node.js, CSS, HTML, Git, Adobe XD,
-          Bash
-        </p>
         <p className={classes.references}>References available upon request</p>
       </div>
     </DefaultLayout>
