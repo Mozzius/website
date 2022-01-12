@@ -45,6 +45,14 @@ const CV: NextPage = () => {
           systems, programming languages, and compilers. Graduated with
           first-class honours.
         </p>
+        <h3>Woodbridge School</h3>
+        <p className={classes.subtitle}>
+          A level: Computer Science (A), Maths (B), Physics (C)
+        </p>
+        <p className={classes.subtitle}>
+          GCSE: 10 A*-B, incl. English (A*), Maths (A*), Computer Science (A)
+        </p>
+        <br />
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
         <p className={classes.subtitle}>
