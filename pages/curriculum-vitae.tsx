@@ -9,6 +9,10 @@ const CV: NextPage = () => {
     <DefaultLayout>
       <Head>
         <title>Curriculum Vitae | Samuel Newman</title>
+        <meta
+          name="description"
+          content="My CV. Education, work experience, etc"
+        />
       </Head>
       <div className={classes.cv}>
         <h1>Samuel Newman</h1>
@@ -38,7 +42,7 @@ const CV: NextPage = () => {
         <h2>Education</h2>
         <h3>BSc Computer Science, University of Kent</h3>
         <p className={classes.subtitle}>
-          Bachelor of Science (Hons, 1<sup>st</sup> class) | 2018 - 2021
+          Hons, 1<sup>st</sup> class | 2018 - 2021
         </p>
         <p>
           Learned Java, Erlang, Haskell, Go. Primarily studied concurrency, type
@@ -93,6 +97,13 @@ const CV: NextPage = () => {
             workflows that maximised developer productivity.
           </li>
         </ul>
+        <h2>About me</h2>
+        <p>
+          My non-programming interests include movies, reading and travelling.
+          Currently reading the Culture novels by Iain M Banks. I enjoy skiing
+          and fencing (former treasurer of UKC&#39;s Fencing Society). Trying to
+          learn Finnish. Dog person.
+        </p>
         <p className={classes.references}>References available upon request</p>
       </div>
     </DefaultLayout>

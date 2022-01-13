@@ -46,12 +46,12 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
-          {"I'm"} Samuel, a Senior Front-end Developer based in the UK. I have a
+          I&#39;m Samuel, a Senior Front-end Developer based in the UK. I have a
           passion for beautiful websites and beautiful code, and attempt to
           create both at the same time.
         </div>
         <div className={classes.right}>
-          I recently graduated First Class with Honours from the University of
+          I recently graduated with First Class Honours from the University of
           Kent, obtaining a Bachelors degree in Computer Science. I specialised
           in the study of programming languages and type systems, creating a new
           one for my{" "}
@@ -61,17 +61,17 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
           .
         </div>
         <div className={classes.middle}>
-          {"I'm"} currently working at Codesigned Ltd on a variety of web and
+          I&#39;m currently working at Codesigned Ltd on a variety of web and
           app projects.{" "}
-          <a onClick={linkTo}>
-            I also have a portfolio of personal projects.
-          </a>
+          <a onClick={linkTo}>I also have a portfolio of personal projects.</a>
         </div>
       </section>
       <section className={classes.contact}>
         <div className={cls(classes.middle, classes.center)}>
           <p>Get in touch</p>
-          <a href="mailto:samuel@felixnewman.com">samuel@felixnewman.com</a>
+          <p>
+            <a href="mailto:samuel@felixnewman.com">samuel@felixnewman.com</a>
+          </p>
         </div>
       </section>
     </Scroll>
@@ -106,25 +106,25 @@ const Home: NextPage = () => {
         <noscript>
           <p>
             Look at you, not using JavaScript. Unfortunately, this page is
-            mostly a cool 3D WebGL experience, so you{"'"}ll need to enable
+            mostly a cool 3D WebGL experience, so you&#39;ll need to enable
             JavaScript to see it.
           </p>
           <p>
-            Alternatively, I can just describe it to you. It opens with {'"'}
-            SAMUEL NEWMAN{'"'} (that{"'"}s me) in very large text. There{"'"}s a
+            Alternatively, I can just describe it to you. It opens with &#34;
+            SAMUEL NEWMAN&#34; (that&#39;s me) in very large text. There&#39;s a
             cool effect where you can only see the outlines of the letters, and
             three point lights are flying around it revealing the fill of the
-            letters. It{"'"}s really cool and took a bunch of effort but if you
-            really want to have JavaScript disabled then good for you. I{"'"}m
+            letters. It&#39;s really cool and took a bunch of effort but if you
+            really want to have JavaScript disabled then good for you. I&#39;m
             not bitter.
           </p>
           <p>
-            You can then scroll down. It says {"'"}ABOUT ME{"'"} with the same
+            You can then scroll down. It says &#34;ABOUT ME&#34; with the same
             cool effect.
           </p>
           <p>It then says (in normal letters):</p>
           <p>
-            {"I'm"} Samuel, a Senior Front-end Developer based in the UK. I have
+            I&#39;m Samuel, a Senior Front-end Developer based in the UK. I have
             a passion for beautiful websites and beautiful code, and attempt to
             create both at the same time.
             <br />I recently graduated First Class with Honours from the
@@ -136,15 +136,17 @@ const Home: NextPage = () => {
             </a>
             .
             <br />
-            {"I'm"} currently working at Codesigned Ltd on a variety of web and
+            I&#39;m currently working at Codesigned Ltd on a variety of web and
             app projects
           </p>
           <p>
-            One final flashy big text thing that says {'"'}CONTACT{'"'}, then it
+            One final flashy big text thing that says &#34;CONTACT&#34;, then it
             says:
           </p>
           <p>Get in touch</p>
-          <a href="mailto:samuel@felixnewman.com">samuel@felixnewman.com</a>
+          <p>
+            <a href="mailto:samuel@felixnewman.com">samuel@felixnewman.com</a>
+          </p>
         </noscript>
       </div>
     </>
