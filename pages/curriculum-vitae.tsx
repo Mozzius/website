@@ -60,10 +60,10 @@ const CV: NextPage = () => {
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
         <p className={classes.subtitle}>
-          Senior Front-end Developer | July 2020 - Present
+          Senior Front-end Developer | July 2021 - Present
         </p>
         <p className={classes.subtitle}>
-          Web Developer | March 2019 - July 2020
+          Web Developer | March 2019 - July 2021
         </p>
         <ul>
           <li>
