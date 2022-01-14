@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 import { DefaultLayout } from "../components/layout";
 import classes from "../styles/CV.module.scss";
@@ -46,8 +47,8 @@ const CV: NextPage = () => {
         </p>
         <p>
           Learned Java, Erlang, Haskell, Go. Primarily studied concurrency, type
-          systems, programming languages, and compilers. Graduated with
-          first-class honours.
+          systems, quantum computing, programming languages, and compilers.
+          Graduated with first-class honours.
         </p>
         <h3>Woodbridge School</h3>
         <p className={classes.subtitle}>
@@ -104,7 +105,12 @@ const CV: NextPage = () => {
           and fencing (former treasurer of UKC&#39;s Fencing Society). Trying to
           learn Finnish. Dog person.
         </p> */}
-        <p className={classes.references}>References available upon request</p>
+        <p className={classes.references}>
+          References available upon request |{" "}
+          <Link href="/cv.docx">
+            <a>Download .docx</a>
+          </Link>
+        </p>
       </div>
     </DefaultLayout>
   );

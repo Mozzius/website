@@ -10,6 +10,7 @@ import LitText from "../components/LitText";
 
 import classes from "../styles/Home.module.scss";
 import cls from "../utils/cls";
+import Link from "next/link";
 
 const Intro = () => {
   const viewport = useThree((three) => three.viewport);
@@ -147,6 +148,7 @@ const Home: NextPage = () => {
           <p>
             <a href="mailto:samuel@felixnewman.com">samuel@felixnewman.com</a>
           </p>
+          <p>See my <Link href="/curriculum-vitae"><a>CV</a></Link>, <Link href="/portfolio"><a>portfolio</a></Link>, <Link href="/blog"><a>blog</a></Link></p>
         </noscript>
       </div>
     </>
