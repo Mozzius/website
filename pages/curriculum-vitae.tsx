@@ -97,13 +97,13 @@ const CV: NextPage = () => {
             workflows that maximised developer productivity.
           </li>
         </ul>
-        <h2>About me</h2>
+        {/* <h2>About me</h2>
         <p>
           My non-programming interests include movies, reading and travelling.
           Currently reading the Culture novels by Iain M Banks. I enjoy skiing
           and fencing (former treasurer of UKC&#39;s Fencing Society). Trying to
           learn Finnish. Dog person.
-        </p>
+        </p> */}
         <p className={classes.references}>References available upon request</p>
       </div>
     </DefaultLayout>
