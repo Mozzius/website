@@ -43,7 +43,7 @@ const CV: NextPage = () => {
         <h2>Education</h2>
         <h3>BSc Computer Science, University of Kent</h3>
         <p className={classes.subtitle}>
-          Hons, 1<sup>st</sup> class | 2018 - 2021
+          Hons, 1<sup>st</sup> class / 2018 - 2021
         </p>
         <p>
           Learned Java, Erlang, Haskell, Go. Primarily studied concurrency, type
@@ -61,10 +61,10 @@ const CV: NextPage = () => {
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
         <p className={classes.subtitle}>
-          Senior Front-end Developer | July 2021 - Present
+          Senior Front-end Developer / July 2021 - Present
         </p>
         <p className={classes.subtitle}>
-          Web Developer | March 2019 - July 2021
+          Web Developer / March 2019 - July 2021
         </p>
         <ul>
           <li>
