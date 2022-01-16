@@ -1,11 +1,17 @@
 ---
 title: A Gentle Introduction to React Three Fiber
 author: Samuel Newman
-date: 2021-12-30
-draft: true
+date: 2022-01-16
+draft: false
 ---
 
-import { SpinningCube } from "../components/blog-stuff";
+import {
+  SpinningCube,
+  BoringCube,
+  SlightlyLessBoringCube,
+  ToggleCube,
+  BasicSpinningCube,
+} from "../components/blog-stuff";
 
 Three.js is great. It's an awesome library for building 3D experiences on the web.
 
@@ -25,22 +31,22 @@ First things first - let me prove it. If a picture if worth a thousand words, he
 
 <SpinningCube />
 
-Here's an exerpt of the code that renders the above (minus the mouse stuff):
+Here's an exerpt of the code that renders the above (minus the mouse following stuff):
 
 ```jsx
 const SpinningCube = () => {
   const ref = useRef<Mesh>(null!);
 
   useFrame(({ clock }) => {
-    ref.current.rotation.y += Math.sin(clock.getElapsedTime()) / 20;
-    ref.current.rotation.x += Math.cos(clock.getElapsedTime()) / 20;
-    ref.current.rotation.z += Math.sin(clock.getElapsedTime()) / 20;
+    ref.current.rotation.y += Math.sin(clock.getElapsedTime()) / 30;
+    ref.current.rotation.x += Math.cos(clock.getElapsedTime()) / 30;
+    ref.current.rotation.z += Math.sin(clock.getElapsedTime()) / 30;
   });
 
   return (
     <mesh ref={ref}>
-      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshStandardMaterial attach="material" color="#ff7c94" />
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="#ff7c94" />
     </mesh>
   );
 };
@@ -57,7 +63,7 @@ ReactDOM.render(
 
 If you're at all familiar with vanilla Three.js, then you'll understand how impressively consise that is.
 
-Regardless, I bet your first reaction reading that code was "What the hell is a &#60;mesh&#62;?!".
+Regardless, I bet your first reaction reading that code was "What the hell is a `<mesh>`?!".
 
 To understand this, we need to understand how React _really_ works.
 
@@ -67,11 +73,257 @@ At it's most basic levels, `react` is a library that maintains a tree data struc
 
 React DOM is what is known as a "reconciler". It reconciles the virtual DOM to the real DOM.
 
-However, you don't have to use React DOM to use React. You know this if you're used React Native - instead of &#60;div&#62; and &#60;p&#62;, you use &#60;View&#62; and &#60;Text&#62;, and React Native reconciles VDOM to the underlying native UI system.
+However, you don't have to use React DOM to use React. You know this if you're used React Native - instead of `<div>` and `<p>`, you use `<View>` and `<Text>`, and React Native reconciles VDOM to the underlying native UI system.
 
 The clever part: who says you need to be reconciling to boring old UI trees? Why can't you reconcile the React tree to, say, Three.js' scene graph?
 
 As it turns out, you totally can. Enter, React Three Fiber.
 
-R3F is to Three.js as React DOM is to HTML. It's a bridge between the two. In fact, they're very loosely coupled. Any lower case JSX component is converted into the equivalent Three.js class, much like how React DOM will convert them to HTML tags. Yeah, it turns out that's possible. Amazing.
+R3F is to Three.js as React DOM is to HTML. It's a bridge between the two. As you'll see, they're quite the natural fit.
 
+One of the many clever parts of R3F is that it's not very closely intertwined with Three.js. Whereas in React Native where you have to import `<View>` and `<Text>` components constantly, in R3F you can just use `<mesh>` (note the lowercase M) and it will automatically find the right **Thing** in the Three.js namespace.
+
+This means that it doesn't have to maintain a component version of every single object in Three.js, which means you're never forced to use an outdated version of Three.js while the R3F maintainers update their copy. A very elegant solutions, in my opinion.
+
+This is a little-known feature of JSX, but as it turns out, it's very powerful.
+
+## Let's get started
+
+Enough of that - let's make something. Let's make a cube.
+
+I'm going to assume you have a React environment set up, and know how to install NPM packages. Install `three` and `@react-three/fiber`, and `@types/three` if you're using TypeScript.
+
+At the root of every R3F app is a `<Canvas>` component - this creates a HTML `<canvas>` and handles all of the boilerplate that Three.js apps usually require, such as dynamic resizing.
+
+R3F also includes (by default) a frameloop, a clock, a scene, a camera, a raycaster, and a WebGL renderer. This cuts out a huge amount of boilerplate code, and makes it very easy to get started.
+
+Now, if we want a cube in Three.js, we need to do the following things:
+
+1. Make a mesh
+2. Make a `boxBufferGeometry`
+3. Make a material
+4. Attach them all together
+5. Add the mesh to the scene
+
+In R3F, we do the same thing, except declaratively.
+
+```jsx
+import { Canvas } from "@react-three/fiber";
+
+const App = () => (
+  <Canvas>
+    <mesh>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshBasicMaterial color="#ff7c94" />
+    </mesh>
+  </Canvas>
+);
+```
+
+Note - no imports needed for `<mesh>` and the rest, just like you don't import `<div>`.
+
+This products the following rather dull scene:
+
+<BoringCube />
+
+Before we jazz it up a little, we need to talk about how R3F interacts with the underlying Three.js objects.
+
+As I'm sure you're aware, Three.js objects have a series of properties and methods, as well as some arguments.
+
+We can use all of them in our React components, but it's not immediately obvious how.
+
+First - the properties. These are passed as JSX props, much like you would pass HTML attributes. There are three differences though - firstly, R3F will handle converting your props into the appropriate `Vector` or `Euler` objects, which is a huge performance boost compared to creating a new object every render (you can still pass Three.js objects as props, if you want to). So for instance, if we want to set the scale of the `<mesh>`, we'd use `scale={2}`, and if we want to set the position, we'd use `position={[0, 3, 2]}`. R3F also supports a type of prop drilling - if you want to set the rotation of the `x` axis of the `<mesh>`, you can do `rotation-x={2}`.
+
+Second - the methods. We use a React ref to get a reference to the object, and use that to call the method in a `useEffect` or `useFrame` hook (we will get to the latter shortly).
+
+Finally - the arguments. These are passed to the `args` prop as an array. As you can tell from the [docs](https://threejs.org/docs/#api/en/geometries/BoxGeometry), `BoxGeometry` takes a series of arguments: the first argument is the width, the second is the height, and the third is the depth. So if you want to make a cube with sides of all 1, we'd pass `[1, 1, 1]` to args.
+
+Let's use this new-found knowledge to make our cube a bit prettier. Our cube is a little small, so we can increase the scale of the `<mesh>`. Let's change our `meshBasicMaterial` to a `meshStandardMaterial` and add both a point light and an ambient light to give our cube some lightings. Finally, let's add a rotation so that we can see more sides.
+
+```jsx
+const App = () => (
+  <Canvas>
+    <mesh scale={2} rotation={[1, 1, 1]}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="#ff7c94" />
+    </mesh>
+    <ambientLight />
+    <pointLight position={[10, 10, 10]} />
+  </Canvas>
+);
+```
+
+<SlightlyLessBoringCube />
+
+Better, but not very... reactive.
+
+## Stateful Cube
+
+Let's add some state. We'll use a `useState` hook to toggle the colour of the cube. Let's make it so that it switches colour when you click on it.
+
+You might be wondering how difficult that is. Luckily, R3F has made it extremely easy - event listeners you might be familiar with from normal React like onClick, onMouseMove, etc. are all available, using a raycast from the mouse position. This means it couldn't be simpler to toggle the color on click.
+
+```jsx
+// https://css-tricks.com/snippets/javascript/random-hex-color/
+const randomColour = () =>
+  `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
+const App = () => {
+  const [colour, setColour] = useState(randomColour);
+
+  const onChangeColour = () => setColour(randomColour);
+
+  return (
+    <Canvas>
+      <mesh scale={2} rotation={[1, 1, 1]} onClick={onChangeColour}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={colour} />
+      </mesh>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+    </Canvas>
+  );
+};
+```
+
+Try clicking on the cube:
+
+<ToggleCube />
+
+As you can see, it works! React is able to diff it's VDOM against Three's scene graph, so it's able to simply change the colour of the cube when the component re-renders rather than having to recreate the entire scene. That is the beauty of React's model.
+
+Adding DOM-like events is a brilliant addition to Three. Something that really impressed me was when I only wanted the first object hit by the raycast to recieve the event, since by default it will trigger every object it passes through. The solution is simply calling `event.stopPropagation()`. So simple and obvious, yet it made my jaw drop.
+
+## Introducing the frameloop
+
+Finally, let's make it move. We'll use a `useFrame` hook to move the cube around. This hook allows us to hook into the frameloop, so we can run updates such as animations every frame.
+
+> We need to be really careful _not_ to cause components to re-render every frame. React is fast but not fast enough to handle this. This means that you should avoid doing things like using state for animations.
+
+`useFrame` has a simple API, and it's really easy to use. It takes a callback, and it will call it every frame. It passes to the callback the R3F state (which contains things like the renderer, the clock, and the camera) and the time delta.
+
+You might notice that there's no dependency array like `useEffect`. This is because whereas `useEffect` is triggered for only some renders of the component, `useFrame` is triggered more times than the component is rendered, so the callback is always up to date.
+
+A typical `useFrame` might look something like this.
+
+```jsx
+useFrame((_, delta) => {
+  cubeRef.current.position.x += delta / 10;
+});
+```
+
+Note that we use refs to modify the object directly. This is because for the best performance, we should trigger re-renders as little as possible. Refs allow us to run code without having to go through React.
+
+```jsx
+// don't do this!
+const [position, setPosition] = useState(0)
+useFrame((_, delta) => {
+  setPosition(pos => pos + delta / 10)
+}
+```
+
+Using this knowledge, let's rotate our cube. Every frame, we should add the time delta to each of the cube's rotation axis.
+
+However, we need to move our cube to it's own component, because `<Canvas>` acts as a context provider so needs to be above the hook call in the component tree. The same applies to `useThree` (which reactively gets the R3F state).
+
+```jsx
+// reimplementing the colour changing is left as
+// an exercise for the reader
+const Cube = () => {
+  const cubeRef = useRef()
+
+  useFrame((_, delta) => {
+    cubeRef.current.rotation.x += delta;
+    cubeRef.current.rotation.y += delta;
+    cubeRef.current.rotation.z += delta;
+  })
+
+  return (
+    <mesh ref={cubeRef} scale={2}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="#ff7c94" />
+    </mesh>
+  );
+}
+
+const App = () => {
+  return (
+    <Canvas>
+      <Cube>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+    </Canvas>
+  );
+};
+```
+
+<BasicSpinningCube />
+
+Look at that, it's spinning.
+
+## What's next?
+
+I hope this taster has left you wanting more. The beauty of R3F is that it's so simple, it's really easy to jump in and start messing around with. The next piece of the puzzle is the `useLoader` hook, which is how R3F neatly encapsulates Three's loaders. I recommend checking out the [docs](https://docs.pmnd.rs) to learn more (hint - they use React suspense).
+
+If you're interested in seeing how I did the effect from the beginning of the article, the full source code is here:
+
+```jsx
+const lerper = new Vector3();
+
+const Cube = () => {
+  const cubeRef = useRef();
+  const [hovering, setHovering] = useState(false);
+
+  // if you need mouse, clock, viewport etc outside of useFrame
+  // i.e. in a useEffect hook
+  // then use useThree
+
+  useFrame(({ mouse, clock, viewport }) => {
+    // using sine waves for funkier movement
+    cubeRef.current.rotation.set(
+      Math.sin(clock.getElapsedTime()),
+      Math.cos(clock.getElapsedTime()),
+      Math.sin(clock.getElapsedTime())
+    );
+
+    const x = (mouse.x * viewport.width) / 2;
+    const y = (mouse.y * viewport.height) / 2;
+
+    // lerp to mouse position if hovering, else lerp to center
+    hovering ? lerper.set(x, y, 0) : lerper.set(0, 0, 0);
+
+    // slow lerp speed if returning to center
+    cubeRef.current.position.lerp(lerper, hovering ? 0.3 : 0.1);
+  });
+
+  return (
+    <mesh
+      ref={cubeRef}
+      scale={2}
+      onPointerEnter={() => setHovering(true)}
+      onPointerLeave={() => setHovering(false)}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="#ff7c94" />
+    </mesh>
+  );
+};
+
+const App = () => {
+  return (
+    <Canvas>
+      <Cube>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+    </Canvas>
+  );
+};
+```
+
+If you can understand that, then you're ready to start messing around with it yourself.
+
+## Conclusion
+
+R3F is a really powerful tool that enhances the already excellent Three.js into a quite unique tool for creating 3D experiences. The maintainers also have a library called Drei (`@react-three/drei`) which has a tonne of useful helpers - some that spring to mind are `<Html>` and `<Stage>`. It's really a must have that solves some common problems.
+
+If you want to see more, I'm working on another tutorial using R3F so stay tuned! In the meantime, check out my [other blogs](/blog). Also feel free to [get in touch with me](mailto:samuel@felixnewman.com).
