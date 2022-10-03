@@ -42,7 +42,7 @@ export const WindowWidth = () => {
   return <p>Your window is {width}px wide</p>;
 };
 
-const DemoCanvas: React.FC = ({ children }) => {
+const DemoCanvas: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { ref, inView } = useInView();
   return (
     <div ref={ref} className={classes.canvas}>
