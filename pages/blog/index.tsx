@@ -58,7 +58,7 @@ const BlogIndex: NextPage<Props> = ({ blogs }) => {
           .map((blog) => (
             <li key={blog.slug}>
               <div className={classes.background} />
-              <Link href={`/blog/${blog.slug}`}>
+              <Link href={`/blog/${blog.snail}`}>
                 <a>
                   <p>{blog.title ?? blog.slug}</p>
                   {blog.date && <p>{blog.date}</p>}
