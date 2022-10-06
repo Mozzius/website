@@ -70,8 +70,7 @@ const Portfolio: NextPage = () => {
           name="Tincy Pics"
           description={[
             "A simple image hosting service, built with Next.js, tRPC, Prisma, PostgreSQL and Tailwind (the create-t3-app stack).",
-            "Images are stored in AWS S3 and cached by AWS Cloudfront",
-            "When I have time I will add authenication and user accounts using NextAuth",
+            "Images are stored in AWS S3 and cached by AWS Cloudfront.",
           ]}
           image={tincyPicsImg}
           url="tincypics"
@@ -87,7 +86,7 @@ const Portfolio: NextPage = () => {
         />
         <Project
           name="Lyre, a programming language"
-          description="My university dissertation research project, Lyre is a typed language that compiles to Erlang and implements channel-based concurrency"
+          description="My university dissertation research project, Lyre is a typed language that compiles to Erlang and implements channel-based concurrency."
           image={lyreImg}
           url="lyre"
           tags={["Haskell", "Erlang", "Yacc", "Lex"]}
@@ -111,7 +110,7 @@ const Portfolio: NextPage = () => {
         />
         <Project
           name="Personal site"
-          description="The website you are currently viewing"
+          description="The website you are currently viewing."
           image={websiteImg}
           url="website"
           tags={[
@@ -124,21 +123,21 @@ const Portfolio: NextPage = () => {
         />
         <Project
           name="Terrain Generator"
-          description="A simplex noise-based terrain generator built with Three.js and React Three Fiber"
+          description="A simplex noise-based terrain generator built with Three.js and React Three Fiber."
           image={terrainImg}
           url="r3f-terrain"
           tags={["React", "Three.js", "React Three Fiber"]}
         />
         <Project
           name="Lyric, a song lyric game"
-          description="One of my earliest projects, Lyric is a game where you have to figure out the lyrics of a song. You can play alone or with other people"
+          description="One of my earliest projects, Lyric is a game where you have to figure out the lyrics of a song. You can play alone or with other people."
           image={lyricImg}
           url="lyric"
           tags={["Python", "Flask", "MongoDB", "Socket.io"]}
         />
         <Project
           name="YouFlix - YouTube in the style of Netflix"
-          description="This project pulls YouTube videos from the YouTube API and displays them in a Netflix-like UI"
+          description="This project pulls YouTube videos from the YouTube API and displays them in a Netflix-like UI."
           image={youflixImg}
           url="youflix"
           tags={["TypeScript", "React", "Next.js", "Google API"]}
