@@ -1,5 +1,7 @@
 import Image from "next/image";
 import type { NextPage } from "next";
+import Head from "next/head";
+import { Fragment } from "react";
 
 import { DefaultLayout } from "../components/layout";
 import classes from "../styles/Portfolio.module.scss";
@@ -8,10 +10,9 @@ import websiteImg from "../images/website.png";
 import lyreImg from "../images/lyre.png";
 import lyricImg from "../images/lyric.png";
 import youflixImg from "../images/youflix.png";
-import tincyImg from "../images/tincy.png";
+import tincyLinkImg from "../images/tincylink.png";
+import tincyPicsImg from "../images/tincypics.png";
 import terrainImg from "../images/terrain.png";
-import Head from "next/head";
-import { Fragment } from "react";
 
 interface Props {
   name: string;
@@ -66,12 +67,38 @@ const Portfolio: NextPage = () => {
       </p>
       <div className={classes.portfolio}>
         <Project
+          name="Tincy Pics"
+          description={[
+            "A simple image hosting service, built with Next.js, tRPC, Prisma, PostgreSQL and Tailwind (the create-t3-app stack).",
+            "Images are stored in AWS S3 and cached by AWS Cloudfront",
+            "In the future, I will add",
+          ]}
+          image={tincyPicsImg}
+          url="tincypics"
+          tags={[
+            "TypeScript",
+            "React",
+            "Next.js",
+            "tRPC",
+            "Prisma",
+            "Tailwind",
+            "AWS",
+          ]}
+        />
+        <Project
+          name="Lyre, a programming language"
+          description="My university dissertation research project, Lyre is a typed language that compiles to Erlang and implements channel-based concurrency"
+          image={lyreImg}
+          url="lyre"
+          tags={["Haskell", "Erlang", "Yacc", "Lex"]}
+        />
+        <Project
           name="Tincy Link"
           description={[
             "A URL shortener built with Next.js, tRPC, Prisma, PostgreSQL and Tailwind (the create-t3-app stack).",
             "Uses Next.js' middleware feature to redirect to the URL stored in the database.",
           ]}
-          image={tincyImg}
+          image={tincyLinkImg}
           url="tincylink"
           tags={[
             "TypeScript",
@@ -81,13 +108,6 @@ const Portfolio: NextPage = () => {
             "Prisma",
             "Tailwind",
           ]}
-        />
-        <Project
-          name="Lyre, a programming language"
-          description="My university dissertation research project, Lyre is a typed language that compiles to Erlang and implements channel-based concurrency"
-          image={lyreImg}
-          url="lyre"
-          tags={["Haskell", "Erlang", "Yacc", "Lex"]}
         />
         <Project
           name="Personal site"
