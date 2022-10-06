@@ -71,7 +71,7 @@ const Portfolio: NextPage = () => {
           description={[
             "A simple image hosting service, built with Next.js, tRPC, Prisma, PostgreSQL and Tailwind (the create-t3-app stack).",
             "Images are stored in AWS S3 and cached by AWS Cloudfront",
-            "In the future, I will add",
+            "When I have time I will add authenication and user accounts using NextAuth",
           ]}
           image={tincyPicsImg}
           url="tincypics"
