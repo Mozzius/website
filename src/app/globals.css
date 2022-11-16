@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.max-square-80 {
+  @apply aspect-square;
+  height: 80vw;
+}
+
+.max-square-60 {
+  @apply aspect-square;
+  height: 60vw;
+}
+
+.max-square-40 {
+  @apply aspect-square;
+  height: 40vw;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .max-square-80 {
+    height: 80vh;
+  }
+
+  .max-square-60 {
+    height: 60vh;
+  }
+
+  .max-square-40 {
+    height: 40vh;
+  }
+}
