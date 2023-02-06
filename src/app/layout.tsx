@@ -1,6 +1,6 @@
 import { Averia_Serif_Libre } from "@next/font/google";
 
-import { Navigation } from "../components/Navigation";
+import { Navigation } from "../components/navigation";
 import "./globals.css";
 
 const averia = Averia_Serif_Libre({ weight: "400", subsets: ["latin"] });
