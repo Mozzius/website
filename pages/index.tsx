@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useRef } from "react";
 import { BsChevronCompactDown as ArrowDown } from "react-icons/bs";
+import Link from "next/link";
 
 import LitText from "../components/LitText";
 
 import classes from "../styles/Home.module.scss";
 import cls from "../utils/cls";
-import Link from "next/link";
 
 const Intro = () => {
   const viewport = useThree((three) => three.viewport);
@@ -62,8 +62,7 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
           .
         </div>
         <div className={classes.middle}>
-          I&#39;m currently working at Codesigned Ltd on a variety of web and
-          app projects.{" "}
+          I&#39;m currently working for Huguenot Services Limited as a Front-End Engineer.{" "}
           <a onClick={linkTo}>I also have a portfolio of personal projects.</a>
         </div>
       </section>
