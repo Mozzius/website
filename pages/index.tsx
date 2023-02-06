@@ -47,9 +47,13 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
-          I&#39;m Samuel, a Senior Front-end Developer based in the UK. I have a
+          I&#39;m Samuel, a Front-End Developer based in the UK. I have a
           passion for beautiful websites and beautiful code, and attempt to
           create both at the same time.
+        </div>
+        <div className={classes.middle}>
+          I&#39;m currently working for Huguenot Services Limited as a Front-End Engineer.{" "}
+          <a onClick={linkTo}>I also have a portfolio of personal projects.</a>
         </div>
         <div className={classes.right}>
           I recently graduated with First Class Honours from the University of
@@ -60,10 +64,6 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
             dissertation research project
           </a>
           .
-        </div>
-        <div className={classes.middle}>
-          I&#39;m currently working for Huguenot Services Limited as a Front-End Engineer.{" "}
-          <a onClick={linkTo}>I also have a portfolio of personal projects.</a>
         </div>
       </section>
       <section className={classes.contact}>
