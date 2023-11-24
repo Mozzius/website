@@ -77,7 +77,7 @@
         background-color: #fff;
         flex-direction: column;
         border-top: transparent solid 1px;
-        transition: 1s ease-in-out;
+        transition: 0.3s ease-in-out;
         transition-property: height, background-color;
         pointer-events: none;
 
@@ -89,17 +89,25 @@
         }
 
         .external {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-evenly;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
           margin: 40px 30px 0;
-          padding: 10px 0;
+          gap: 5px;
           border-top: rgba(120, 120, 120, 0.3) solid 1px;
+          transition: background-color 0.2s ease;
 
           a {
-            padding: 0;
+            margin: 0;
+            padding: 10px 0px;
             background: none !important;
+            border-radius: 5px;
+            width: 100%;
+            display: grid;
+            place-items: center;
+
+            &:hover {
+              background: rgba(120, 120, 120, 0.1) !important
+            }
           }
         }
       }

@@ -61,13 +61,13 @@ const Nav = () => {
           <Link path="/curriculum-vitae">Curriculum Vitae</Link>
           <div className={classes.external}>
             <a href="https://github.com/mozzius">
-              <GithubIcon size={32} />
+              <GithubIcon size={24} />
             </a>
             <a href="https://www.linkedin.com/in/samuel-felix-newman">
-              <LinkedinIcon size={32} />
+              <LinkedinIcon size={24} />
             </a>
             <a href="mailto:samuel@felixnewman.com">
-              <MailIcon size={32} />
+              <MailIcon size={24} />
             </a>
           </div>
         </nav>
