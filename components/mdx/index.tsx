@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import * as Components from "../blog-stuff";
 import Codeblock from "./Codeblock";
 
