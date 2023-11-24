@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Cross as Hamburger } from "hamburger-react";
-import {
-  FaEnvelopeSquare as MailIcon,
-  FaGithubSquare as GithubIcon,
-  FaLinkedin as LinkedinIcon,
-} from "react-icons/fa";
+import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
 
 import classes from "../styles/Nav.module.scss";
 import cls from "../utils/cls";
@@ -24,16 +20,15 @@ const Link = ({
   const active = path === `/${base}`;
 
   return (
-    <NextLink href={path}>
-      <a
-        className={cls({
-          [classes.active]: active,
-          [classes.homeLink]: route === "/",
-        })}
-        aria-current={active ? "page" : undefined}
-      >
-        {children}
-      </a>
+    <NextLink
+      href={path}
+      className={cls({
+        [classes.active]: active,
+        [classes.homeLink]: route === "/",
+      })}
+      aria-current={active ? "page" : undefined}
+    >
+      {children}
     </NextLink>
   );
 };

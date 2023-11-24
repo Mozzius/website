@@ -50,13 +50,6 @@ const CV: NextPage = () => {
           systems, quantum computing, programming languages, and compilers.
           Graduated with first-class honours.
         </p>
-        <h3>Woodbridge School</h3>
-        <p className={classes.subtitle}>
-          A level: Computer Science (A), Maths (B), Physics (C)
-        </p>
-        <p className={classes.subtitle}>
-          GCSE: 10 A*-B, incl. English (A*), Maths (A*), Computer Science (A)
-        </p>
         <br />
         <h2>Work Experience</h2>
         <h3>Senior Front-end Developer, Codesigned Ltd</h3>
@@ -98,18 +91,9 @@ const CV: NextPage = () => {
             workflows that maximised developer productivity.
           </li>
         </ul>
-        {/* <h2>About me</h2>
-        <p>
-          My non-programming interests include movies, reading and travelling.
-          Currently reading the Culture novels by Iain M Banks. I enjoy skiing
-          and fencing (former treasurer of UKC&#39;s Fencing Society). Trying to
-          learn Finnish. Dog person.
-        </p> */}
         <p className={classes.references}>
           References available upon request |{" "}
-          <Link href="/cv.docx">
-            <a>Download .docx</a>
-          </Link>
+          <Link href="/cv.docx">Download .docx</Link>
         </p>
       </div>
     </DefaultLayout>

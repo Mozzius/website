@@ -1,14 +1,13 @@
+import { useRef } from "react";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { Scroll, ScrollControls, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { useRef } from "react";
-import { BsChevronCompactDown as ArrowDown } from "react-icons/bs";
-import Link from "next/link";
+import { ChevronDownIcon } from "lucide-react";
 
 import LitText from "../components/LitText";
-
 import classes from "../styles/Home.module.scss";
 import cls from "../utils/cls";
 
@@ -29,21 +28,21 @@ const Intro = () => {
   );
 };
 
-const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
+const IntroContent = () => {
   const scroll = useScroll();
   const ref = useRef<HTMLDivElement>(null!);
 
   useFrame(() => {
-    ref.current.style.opacity = (1 - scroll.range(0, 0.25) * 4).toString();
+    if (ref.current) {
+      ref.current.style.opacity = (1 - scroll.range(0, 0.25) * 4).toString();
+    }
   });
 
   return (
     <Scroll html>
       <div className={classes.arrow} ref={ref}>
         <p>Scroll...</p>
-        <div>
-          <ArrowDown color="#fff" size={32} />
-        </div>
+        <ChevronDownIcon color="#fff" size={24} strokeWidth={1} />
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
@@ -52,8 +51,11 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
           create both at the same time.
         </div>
         <div className={classes.middle}>
-          I&#39;m currently working for Huguenot Services Limited as a Front-End Engineer.{" "}
-          <a onClick={linkTo}>I also have a portfolio of personal projects.</a>
+          I&#39;m currently working for Huguenot Services Limited as a Front-End
+          Engineer.{" "}
+          <Link href="/portfolio">
+            I also have a portfolio of personal projects.
+          </Link>
         </div>
         <div className={classes.right}>
           I recently graduated with First Class Honours from the University of
@@ -79,8 +81,6 @@ const IntroContent = ({ linkTo }: { linkTo: (evt: any) => void }) => {
 };
 
 const Home: NextPage = () => {
-  const router = useRouter();
-
   return (
     <>
       <Head>
@@ -94,12 +94,7 @@ const Home: NextPage = () => {
         >
           <ScrollControls pages={4}>
             <Intro />
-            <IntroContent
-              linkTo={(evt: MouseEvent) => {
-                evt.preventDefault();
-                router.push("/portfolio");
-              }}
-            />
+            <IntroContent />
           </ScrollControls>
           <color attach="background" args={["black"]} />
         </Canvas>
@@ -147,7 +142,11 @@ const Home: NextPage = () => {
           <p>
             <a href="mailto:samuel@felixnewman.com">samuel@felixnewman.com</a>
           </p>
-          <p>See my <Link href="/curriculum-vitae"><a>CV</a></Link>, <Link href="/portfolio"><a>portfolio</a></Link>, <Link href="/blog"><a>blog</a></Link></p>
+          <p>
+            See my <Link href="/curriculum-vitae">CV</Link>,{" "}
+            <Link href="/portfolio">portfolio</Link>,{" "}
+            <Link href="/blog">blog</Link>
+          </p>
         </noscript>
       </div>
     </>

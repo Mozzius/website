@@ -16,13 +16,13 @@
     width: 350px;
     float: right;
     margin: 0 0 0 20px;
-    box-shadow: var(--pink-shadow);
+    outline: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
 
     p {
       margin: 0 0 10px;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     li {
@@ -37,14 +37,14 @@
   }
 
   .subtitle {
-    font-family: "Courier New", Courier, monospace;
+    font-style: italic;
     color: #333;
     margin: 0;
     white-space: pre-wrap;
   }
 
   .references {
-    font-weight: 600;
+    font-weight: bold;
     margin: 50px 0 30px;
     text-align: center;
   }

@@ -1,15 +1,15 @@
 import fs from "fs";
-import matter from "gray-matter";
-import { format } from "date-fns";
-import { MDXRemote } from "next-mdx-remote";
 import { ParsedUrlQuery } from "querystring";
-import { serialize } from "next-mdx-remote/serialize";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-
-import { mdxPath, getSlugs } from "../../utils/mdx";
-import { components } from "../../components/mdx";
-import { BlogLayout } from "../../components/layout";
 import Head from "next/head";
+import { format } from "date-fns";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+
+import { BlogLayout } from "../../components/layout";
+import { components } from "../../components/mdx";
+import { getSlugs, mdxPath } from "../../utils/mdx";
 
 interface Props {
   source: any;

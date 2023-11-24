@@ -1,6 +1,6 @@
+import { useRef } from "react";
 import { Text } from "@react-three/drei";
 import { GroupProps, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
 import type { Group } from "three";
 
 interface Props extends GroupProps {
@@ -17,17 +17,17 @@ const LitText: React.FC<Props> = ({ textAlign, children, ...props }) => {
     light1.current.rotation.set(
       Math.cos(clock.getElapsedTime() + 100),
       Math.sin(clock.getElapsedTime() + 200),
-      Math.sin(clock.getElapsedTime() + 300)
+      Math.sin(clock.getElapsedTime() + 300),
     );
     light2.current.rotation.set(
       Math.sin(clock.getElapsedTime() + 400),
       Math.cos(clock.getElapsedTime() + 500),
-      Math.sin(clock.getElapsedTime() + 600)
+      Math.sin(clock.getElapsedTime() + 600),
     );
     light3.current.rotation.set(
       Math.sin(clock.getElapsedTime() + 700),
       Math.sin(clock.getElapsedTime() + 800),
-      Math.cos(clock.getElapsedTime() + 900)
+      Math.cos(clock.getElapsedTime() + 900),
     );
 
     const screen = Math.min(window.innerWidth, window.innerHeight + 500);

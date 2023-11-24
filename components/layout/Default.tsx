@@ -8,7 +8,7 @@ const DefaultLayout = ({ children }: Props) => {
   return (
     <div className={classes.background}>
       <section className={classes.section}>
-        <main className={classes.blog}>{children}</main>
+        <main className={classes.main}>{children}</main>
       </section>
     </div>
   );

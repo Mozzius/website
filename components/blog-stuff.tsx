@@ -1,5 +1,5 @@
-import { useFrame, Canvas, useThree } from "@react-three/fiber";
 import React, { useEffect, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useInView } from "react-intersection-observer";
 import { Mesh, Vector3 } from "three";
 
@@ -28,7 +28,7 @@ export const Counter = () => {
 
 export const WindowWidth = () => {
   const [width, setWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const SpinningCubeInner = () => {
     ref.current.rotation.set(
       Math.sin(clock.getElapsedTime()),
       Math.cos(clock.getElapsedTime()),
-      Math.sin(clock.getElapsedTime())
+      Math.sin(clock.getElapsedTime()),
     );
 
     const x = (mouse.x * viewport.width) / 2;

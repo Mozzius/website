@@ -1,14 +1,13 @@
-import type { GetStaticProps, NextPage } from "next";
-import Link from "next/link";
 import fs from "fs";
-import matter from "gray-matter";
-import { format } from "date-fns";
-
-import { mdxPath, getSlugs } from "../../utils/mdx";
-import { DefaultLayout } from "../../components/layout";
-
-import classes from "../../styles/Blog.module.scss";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
+import { format } from "date-fns";
+import matter from "gray-matter";
+
+import { DefaultLayout } from "../../components/layout";
+import classes from "../../styles/Blog.module.scss";
+import { getSlugs, mdxPath } from "../../utils/mdx";
 
 interface Props {
   blogs: {
@@ -58,11 +57,9 @@ const BlogIndex: NextPage<Props> = ({ blogs }) => {
           .map((blog) => (
             <li key={blog.slug}>
               <div className={classes.background} />
-              <Link href={`/blog/${blog.snail}`}>
-                <a>
-                  <p>{blog.title ?? blog.slug}</p>
-                  {blog.date && <p>{blog.date}</p>}
-                </a>
+              <Link href={`/blog/${blog.slug}`}>
+                <p>{blog.title ?? blog.slug}</p>
+                {blog.date && <p>{blog.date}</p>}
               </Link>
             </li>
           ))}

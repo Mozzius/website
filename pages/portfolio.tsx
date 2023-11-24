@@ -1,18 +1,18 @@
-import Image from "next/image";
+import { Fragment } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Fragment } from "react";
+import Image from "next/image";
 
 import { DefaultLayout } from "../components/layout";
-import classes from "../styles/Portfolio.module.scss";
-
-import websiteImg from "../images/website.png";
+import grayskyImg from "../images/graysky.png";
 import lyreImg from "../images/lyre.png";
 import lyricImg from "../images/lyric.png";
-import youflixImg from "../images/youflix.png";
+import terrainImg from "../images/terrain.png";
 import tincyLinkImg from "../images/tincylink.png";
 import tincyPicsImg from "../images/tincypics.png";
-import terrainImg from "../images/terrain.png";
+import websiteImg from "../images/website.png";
+import youflixImg from "../images/youflix.png";
+import classes from "../styles/Portfolio.module.scss";
 
 interface Props {
   name: string;
@@ -66,6 +66,23 @@ const Portfolio: NextPage = () => {
         <a href="https://github.com/mozzius">go straight to my profile</a>.
       </p>
       <div className={classes.portfolio}>
+        <Project
+          name="Graysky"
+          description={[
+            "A third-party client for the Bluesky social network, available on iOS and Android. It's had over 15k downloads at time of writing.",
+            "Graysky was the first client to launch on the App Store and Play Store, and was featured in TechCrunch.",
+          ]}
+          image={grayskyImg}
+          url="graysky"
+          tags={[
+            "React Native",
+            "Expo Router",
+            "Tailwind",
+            "Prisma",
+            "Next.js",
+            "tRPC",
+          ]}
+        />
         <Project
           name="Tincy Pics"
           description={[
@@ -134,13 +151,6 @@ const Portfolio: NextPage = () => {
           image={lyricImg}
           url="lyric"
           tags={["Python", "Flask", "MongoDB", "Socket.io"]}
-        />
-        <Project
-          name="YouFlix - YouTube in the style of Netflix"
-          description="This project pulls YouTube videos from the YouTube API and displays them in a Netflix-like UI."
-          image={youflixImg}
-          url="youflix"
-          tags={["TypeScript", "React", "Next.js", "Google API"]}
         />
       </div>
     </DefaultLayout>

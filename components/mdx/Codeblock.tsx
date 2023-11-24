@@ -1,5 +1,5 @@
 import React from "react";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import { Highlight, Language, themes } from "prism-react-renderer";
 
 const Codeblock = ({
   children,
@@ -10,7 +10,7 @@ const Codeblock = ({
 }) => {
   const language = className.replace(/language-/, "") as Language;
   return (
-    <Highlight {...defaultProps} code={children} language={language}>
+    <Highlight theme={themes.vsDark} code={children} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={className} style={{ ...style }}>
           {tokens.map(
@@ -21,7 +21,7 @@ const Codeblock = ({
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
                 </div>
-              )
+              ),
           )}
         </pre>
       )}
