@@ -46,26 +46,10 @@ const IntroContent = () => {
       </div>
       <section className={classes.about}>
         <div className={classes.left}>
-          I&#39;m Samuel, a Front-End Developer based in the UK. I have a
-          passion for beautiful websites and beautiful code, and attempt to
-          create both at the same time.
+          I&#39;m Samuel, a developer based in the UK.
         </div>
         <div className={classes.middle}>
-          I&#39;m currently working for Huguenot Services Limited as a Front-End
-          Engineer.{" "}
-          <Link href="/portfolio">
-            I also have a portfolio of personal projects.
-          </Link>
-        </div>
-        <div className={classes.right}>
-          I recently graduated with First Class Honours from the University of
-          Kent, obtaining a Bachelors degree in Computer Science. I specialised
-          in the study of programming languages and type systems, creating a new
-          one for my{" "}
-          <a href="https://github.com/mozzius/lyre">
-            dissertation research project
-          </a>
-          .
+          I&#39;m currently working for Bluesky Social.
         </div>
       </section>
       <section className={classes.contact}>
